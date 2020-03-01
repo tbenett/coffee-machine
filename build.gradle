@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group 'io.benett'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+   testImplementation 'org.assertj:assertj-core:3.15.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.6.0'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
