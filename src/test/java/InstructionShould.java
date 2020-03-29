@@ -4,11 +4,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SetUp {
+class InstructionShould {
 
   @ParameterizedTest
   @CsvSource({"coffee, C::" , "chocolate, H::", "tea, T::"})
-  void makes(String customerOrder, String instruction) {
+  void make_drink_instruction_without_sugar(String customerOrder, String instruction) {
     assertThat(Instruction.make(customerOrder)).isEqualTo(instruction) ;
   }
 
@@ -19,12 +19,12 @@ class SetUp {
     "tea with 1 sugar, T:1:0",
     "chocolate with 1 sugar, H:1:0"
   })
-  void name___(String drink, String instruction) {
+  void make_drink_instruction_with_sugar_and_stick(String drink, String instruction) {
     assertThat(Instruction.make(drink)).isEqualTo(instruction);
   }
 
   @Test
-  void name() {
+  void make_an_instruction_message() {
     String message = "hello";
 
     assertThat(Instruction.make(message)).isEqualTo("M:" + message);

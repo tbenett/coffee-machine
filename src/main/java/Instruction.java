@@ -1,5 +1,4 @@
 class Instruction {
-  final static String SEPARATOR_CODE = ":";
 
   static String make(String order) {
 
@@ -7,13 +6,7 @@ class Instruction {
       return new DrinkInstruction(order).make();
     }
 
-    return makeMessageInstruction(order);
-  }
-
-  private static String makeMessageInstruction(String messageOrder) {
-    final var MESSAGE_CODE = "M";
-
-    return MESSAGE_CODE + SEPARATOR_CODE + messageOrder;
+    return new Message(order).make();
   }
 
   private static boolean isDrinkOrder(String order) {
