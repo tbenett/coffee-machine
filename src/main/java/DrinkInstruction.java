@@ -2,9 +2,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DrinkInstruction {
-  final static String SEPARATOR_CODE = ":";
   final String drinkOrder;
+
+  public static final String SEPARATOR_CODE = ":";
   public static final String WITHOUT_SUGAR_CODE = "";
+  public static final String WITH_STICK = "0";
+  public static final String WITHOUT_STICK = "";
 
   DrinkInstruction(String drinkOrder) {
       this.drinkOrder = drinkOrder;
@@ -17,16 +20,25 @@ public class DrinkInstruction {
         + makeStickCode();
    }
 
-  private String makeStickCode() {
-    final var WITHOUT_STICK = "";
-    final var WITH_STICK = "0";
-
-    return hasSugar() ? WITH_STICK : WITHOUT_STICK;
+  private String makeDrinkCode() {
+    if (drinkOrder.startsWith("tea")) {
+      return "T";
+    }
+    if (drinkOrder.startsWith("coffee")) {
+      return "C";
+    }
+    if (drinkOrder.startsWith("chocolate")) {
+      return "H";
+    }
+    return "";
   }
 
   private String makeSugarQuantityCode() {
-
     return hasSugar() ? extractQuantitySugar() : WITHOUT_SUGAR_CODE;
+  }
+
+    private String makeStickCode() {
+    return hasSugar() ? WITH_STICK : WITHOUT_STICK;
   }
 
   private boolean hasSugar() {
@@ -42,18 +54,5 @@ public class DrinkInstruction {
     matcherDrinkWithSugar.find();
 
     return matcherDrinkWithSugar.group(1);
-  }
-
-  private String makeDrinkCode() {
-    if (drinkOrder.startsWith("tea")) {
-      return "T";
-    }
-    if (drinkOrder.startsWith("coffee")) {
-      return "C";
-    }
-    if (drinkOrder.startsWith("chocolate")) {
-      return "H";
-    }
-    return "";
   }
 }
