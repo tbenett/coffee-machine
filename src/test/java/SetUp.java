@@ -35,7 +35,7 @@ class SetUp {
   private String makeInstruction(String order) {
 
     if (isDrinkOrder(order)) {
-      return new DrinkOrder().makeDrinkInstruction(order);
+      return new DrinkInstruction(order).make();
     }
 
     return makeMessageInstruction(order);

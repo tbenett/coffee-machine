@@ -1,46 +1,42 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DrinkOrder {
+public class DrinkInstruction {
   final static String SEPARATOR_CODE = ":";
+  final String drinkOrder;
+  public static final String WITHOUT_SUGAR_CODE = "";
 
-   String makeDrinkInstruction(String drinkOrder) {
+  DrinkInstruction(String drinkOrder) {
+      this.drinkOrder = drinkOrder;
+    }
+
+   String make() {
     return
-      makeDrinkCode(drinkOrder) + SEPARATOR_CODE
-        + makeSugarQuantityCode(drinkOrder) + SEPARATOR_CODE
-        + makeStickCode(drinkOrder);
+      makeDrinkCode() + SEPARATOR_CODE
+        + makeSugarQuantityCode() + SEPARATOR_CODE
+        + makeStickCode();
    }
 
-  private String makeStickCode(String drinkOrder) {
+  private String makeStickCode() {
     final var WITHOUT_STICK = "";
     final var WITH_STICK = "0";
 
-    String stickCode = WITHOUT_STICK;
-    if (hasSugar(drinkOrder)) {
-      stickCode = WITH_STICK;
-    }
-    return stickCode;
+    return hasSugar() ? WITH_STICK : WITHOUT_STICK;
   }
 
-  private String makeSugarQuantityCode(String drinkOrder) {
-    String WITHOUT_SUGAR = "";
-    String quantitySugarCode = WITHOUT_SUGAR;
+  private String makeSugarQuantityCode() {
 
-    if (hasSugar(drinkOrder)) {
-      quantitySugarCode = extractQuantitySugar(drinkOrder);
-
-    }
-    return quantitySugarCode;
+    return hasSugar() ? extractQuantitySugar() : WITHOUT_SUGAR_CODE;
   }
 
-  private boolean hasSugar(String drinkOrder) {
+  private boolean hasSugar() {
     Pattern patternDrinkWithSugar = Pattern.compile(".*sugar[s]?");
     Matcher matcherDrinkWithSugar = patternDrinkWithSugar.matcher(drinkOrder);
 
     return matcherDrinkWithSugar.find();
   }
 
-  private String extractQuantitySugar(String drinkOrder) {
+  private String extractQuantitySugar() {
     Pattern patternDrinkWithSugar = Pattern.compile(".*(1|2) sugar[s]?");
     Matcher matcherDrinkWithSugar = patternDrinkWithSugar.matcher(drinkOrder);
     matcherDrinkWithSugar.find();
@@ -48,7 +44,7 @@ public class DrinkOrder {
     return matcherDrinkWithSugar.group(1);
   }
 
-  private String makeDrinkCode(String drinkOrder) {
+  private String makeDrinkCode() {
     if (drinkOrder.startsWith("tea")) {
       return "T";
     }
