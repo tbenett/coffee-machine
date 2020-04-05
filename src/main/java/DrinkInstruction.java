@@ -4,41 +4,17 @@ import java.util.regex.Pattern;
 public class DrinkInstruction {
   final String drinkOrder;
 
-  public static final String SEPARATOR_CODE = ":";
-  public static final String WITHOUT_SUGAR_CODE = "";
-  public static final String WITH_STICK = "0";
-  public static final String WITHOUT_STICK = "";
-
   DrinkInstruction(String drinkOrder) {
       this.drinkOrder = drinkOrder;
     }
 
-   String make() {
-    return
-      makeDrinkCode() + SEPARATOR_CODE
-        + makeSugarQuantityCode() + SEPARATOR_CODE
-        + makeStickCode();
-   }
 
-  private String makeDrinkCode() {
-    if (drinkOrder.startsWith("tea")) {
-      return "T";
-    }
-    if (drinkOrder.startsWith("coffee")) {
-      return "C";
-    }
-    if (drinkOrder.startsWith("chocolate")) {
-      return "H";
-    }
-    return "";
+  String makeSugarQuantityCode() {
+    return hasSugar() ? extractQuantitySugar() : Instruction.WITHOUT_SUGAR_CODE;
   }
 
-  private String makeSugarQuantityCode() {
-    return hasSugar() ? extractQuantitySugar() : WITHOUT_SUGAR_CODE;
-  }
-
-    private String makeStickCode() {
-    return hasSugar() ? WITH_STICK : WITHOUT_STICK;
+    String makeStickCode() {
+    return hasSugar() ? Instruction.WITH_STICK : Instruction.WITHOUT_STICK;
   }
 
   private boolean hasSugar() {
