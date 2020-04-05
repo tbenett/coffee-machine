@@ -1,3 +1,6 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 class Instruction {
 
   public static final String SEPARATOR_CODE = ":";
@@ -10,9 +13,9 @@ class Instruction {
     if (isDrinkOrder(order)) {
       DrinkInstruction drinkInstruction = new DrinkInstruction(order);
       return
-        makeDrinkCode(drinkInstruction.drinkOrder) + SEPARATOR_CODE
-          + drinkInstruction.makeSugarQuantityCode() + SEPARATOR_CODE
-          + drinkInstruction.makeStickCode();
+        new Instruction().makeDrinkCode(drinkInstruction.drinkOrder) + SEPARATOR_CODE
+          + makeSugarQuantityCode(drinkInstruction) + SEPARATOR_CODE
+          + makeStickCode(drinkInstruction);
     }
 
     return new Message(order).make();
@@ -22,7 +25,30 @@ class Instruction {
     return order.startsWith("tea") || order.startsWith("chocolate") || order.startsWith("coffee");
   }
 
-  static String makeDrinkCode(String drinkOrder) {
+  static String makeSugarQuantityCode(DrinkInstruction drinkInstruction) {
+    return hasSugar(drinkInstruction.drinkOrder) ? extractQuantitySugar(drinkInstruction.drinkOrder) : WITHOUT_SUGAR_CODE;
+  }
+
+  static String makeStickCode(DrinkInstruction drinkInstruction) {
+    return hasSugar(drinkInstruction.drinkOrder) ? WITH_STICK : WITHOUT_STICK;
+  }
+
+  static String extractQuantitySugar(String drinkOrder) {
+    Pattern patternDrinkWithSugar = Pattern.compile(".*(1|2) sugar[s]?");
+    Matcher matcherDrinkWithSugar = patternDrinkWithSugar.matcher(drinkOrder);
+    matcherDrinkWithSugar.find();
+
+    return matcherDrinkWithSugar.group(1);
+  }
+
+  static boolean hasSugar(String drinkOrder) {
+    Pattern patternDrinkWithSugar = Pattern.compile(".*sugar[s]?");
+    Matcher matcherDrinkWithSugar = patternDrinkWithSugar.matcher(drinkOrder);
+
+    return matcherDrinkWithSugar.find();
+  }
+
+  String makeDrinkCode(String drinkOrder) {
     if (drinkOrder.startsWith("tea")) {
       return "T";
     }
