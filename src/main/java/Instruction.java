@@ -11,11 +11,10 @@ class Instruction {
   static String make(String order) {
 
     if (isDrinkOrder(order)) {
-      DrinkInstruction drinkInstruction = new DrinkInstruction(order);
       return
-        new Instruction().makeDrinkCode(drinkInstruction.drinkOrder) + SEPARATOR_CODE
-          + makeSugarQuantityCode(drinkInstruction) + SEPARATOR_CODE
-          + makeStickCode(drinkInstruction);
+        new Instruction().makeDrinkCode(order) + SEPARATOR_CODE
+          + makeSugarQuantityCode(order) + SEPARATOR_CODE
+          + makeStickCode(order);
     }
 
     return new Message(order).make();
@@ -25,12 +24,12 @@ class Instruction {
     return order.startsWith("tea") || order.startsWith("chocolate") || order.startsWith("coffee");
   }
 
-  static String makeSugarQuantityCode(DrinkInstruction drinkInstruction) {
-    return hasSugar(drinkInstruction.drinkOrder) ? extractQuantitySugar(drinkInstruction.drinkOrder) : WITHOUT_SUGAR_CODE;
+  static String makeSugarQuantityCode(String drinkOrder) {
+    return hasSugar(drinkOrder) ? extractQuantitySugar(drinkOrder) : WITHOUT_SUGAR_CODE;
   }
 
-  static String makeStickCode(DrinkInstruction drinkInstruction) {
-    return hasSugar(drinkInstruction.drinkOrder) ? WITH_STICK : WITHOUT_STICK;
+  static String makeStickCode(String drinkOrder) {
+    return hasSugar(drinkOrder) ? WITH_STICK : WITHOUT_STICK;
   }
 
   static String extractQuantitySugar(String drinkOrder) {
