@@ -7,18 +7,23 @@ class Instruction {
   public static final String WITHOUT_SUGAR_CODE = "";
   public static final String WITH_STICK = "0";
   public static final String WITHOUT_STICK = "";
+  public static final String MESSAGE_CODE = "M";
 
   static String make(String order) {
 
     if (isDrinkOrder(order)) {
       return
-        new Instruction().makeDrinkCode(order) + SEPARATOR_CODE
+        makeDrinkCode(order) + SEPARATOR_CODE
           + makeSugarQuantityCode(order) + SEPARATOR_CODE
           + makeStickCode(order);
     }
 
-    return new Message(order).make();
+    return makeMessage(order);
   }
+
+  static String makeMessage(String message) {
+    return MESSAGE_CODE + SEPARATOR_CODE + message;
+ }
 
   private static boolean isDrinkOrder(String order) {
     return order.startsWith("tea") || order.startsWith("chocolate") || order.startsWith("coffee");
@@ -47,7 +52,7 @@ class Instruction {
     return matcherDrinkWithSugar.find();
   }
 
-  String makeDrinkCode(String drinkOrder) {
+  static String makeDrinkCode(String drinkOrder) {
     if (drinkOrder.startsWith("tea")) {
       return "T";
     }
