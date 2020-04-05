@@ -8,9 +8,11 @@ class InstructionShould {
 
   @ParameterizedTest
   @CsvSource({"coffee, C::" , "chocolate, H::", "tea, T::"})
-  void make_drink_instruction_without_sugar(String customerOrder, String instruction) {
-    assertThat(Instruction.make(customerOrder)).isEqualTo(instruction) ;
+  void make_drink_instruction_without_sugar(String drink, String instruction) {
+    assertThat(InstructionFactory.make(drink)).isEqualTo(instruction) ;
   }
+
+  // InstructionFactory(drink).toString()
 
   @ParameterizedTest
   @CsvSource({
@@ -20,13 +22,13 @@ class InstructionShould {
     "chocolate with 1 sugar, H:1:0"
   })
   void make_drink_instruction_with_sugar_and_stick(String drink, String instruction) {
-    assertThat(Instruction.make(drink)).isEqualTo(instruction);
+    assertThat(InstructionFactory.make(drink)).isEqualTo(instruction);
   }
 
   @Test
   void make_an_instruction_message() {
     String message = "hello";
 
-    assertThat(Instruction.make(message)).isEqualTo("M:" + message);
+    assertThat(InstructionFactory.make(message)).isEqualTo("M:" + message);
   }
 }
