@@ -11,4 +11,8 @@ public class MessageInstruction {
      String make() {
          return MESSAGE_CODE + SEPARATOR_CODE + order;
     }
+
+    public String toString() {
+        return make();
+    }
 }

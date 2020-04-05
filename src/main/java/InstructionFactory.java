@@ -1,6 +1,6 @@
 class InstructionFactory {
 
-  static String make(String order) {
+   static String make(String order) {
     if (isDrinkOrder(order)) {
       return new DrinkInstruction(order).make();
     }
@@ -8,7 +8,11 @@ class InstructionFactory {
     return new MessageInstruction(order).make();
   }
 
-  private static boolean isDrinkOrder(String order) {
+  static MessageInstruction makeInstruction(String message) {
+     return new MessageInstruction(message);
+  }
+
+  static private boolean isDrinkOrder(String order) {
     return order.startsWith("tea") || order.startsWith("chocolate") || order.startsWith("coffee");
   }
 }
