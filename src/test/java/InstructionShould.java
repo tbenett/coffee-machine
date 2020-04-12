@@ -29,6 +29,4 @@ class InstructionShould {
 
     assertThat(InstructionFactory.create(message).toString()).isEqualTo("M:" + message);
   }
-
-
 }

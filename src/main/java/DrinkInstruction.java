@@ -1,7 +1,7 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DrinkInstruction {
+public class DrinkInstruction extends Instruction {
   final String drinkOrder;
 
   public static final String SEPARATOR_CODE = ":";
@@ -10,15 +10,16 @@ public class DrinkInstruction {
   public static final String WITHOUT_STICK = "";
 
   DrinkInstruction(String drinkOrder) {
-      this.drinkOrder = drinkOrder;
-    }
+    this.drinkOrder = drinkOrder;
+  }
 
-   String make() {
+  @Override
+  String make() {
     return
       makeDrinkCode() + SEPARATOR_CODE
         + makeSugarQuantityCode() + SEPARATOR_CODE
         + makeStickCode();
-   }
+  }
 
   private String makeDrinkCode() {
     if (drinkOrder.startsWith("tea")) {
@@ -37,7 +38,7 @@ public class DrinkInstruction {
     return hasSugar() ? extractQuantitySugar() : WITHOUT_SUGAR_CODE;
   }
 
-    private String makeStickCode() {
+  private String makeStickCode() {
     return hasSugar() ? WITH_STICK : WITHOUT_STICK;
   }
 
@@ -54,10 +55,5 @@ public class DrinkInstruction {
     matcherDrinkWithSugar.find();
 
     return matcherDrinkWithSugar.group(1);
-  }
-
-  @Override
-  public String toString() {
-    return make();
   }
 }
