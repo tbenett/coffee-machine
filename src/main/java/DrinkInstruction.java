@@ -55,4 +55,9 @@ public class DrinkInstruction {
 
     return matcherDrinkWithSugar.group(1);
   }
+
+  @Override
+  public String toString() {
+    return make();
+  }
 }

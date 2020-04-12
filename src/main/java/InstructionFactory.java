@@ -15,4 +15,8 @@ class InstructionFactory {
   static private boolean isDrinkOrder(String order) {
     return order.startsWith("tea") || order.startsWith("chocolate") || order.startsWith("coffee");
   }
+
+  public static DrinkInstruction create(String drink) {
+    return new DrinkInstruction(drink);
+  }
 }
