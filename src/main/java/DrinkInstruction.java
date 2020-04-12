@@ -24,13 +24,13 @@ public class DrinkInstruction extends Instruction {
   }
 
   private String makeDrinkCode() {
-    if (drinkOrder.startsWith("tea")) {
+    if (InstructionFactory.isTea(drinkOrder)) {
       return TEA_CODE;
     }
-    if (drinkOrder.startsWith("coffee")) {
+    if (InstructionFactory.isCoffee(drinkOrder)) {
       return COFFEE_CODE;
     }
-    if (drinkOrder.startsWith("chocolate")) {
+    if (InstructionFactory.isHotChocolate(drinkOrder)) {
       return HOT_CHOCOLATE_CODE;
     }
     return "";
