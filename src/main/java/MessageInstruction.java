@@ -1,5 +1,4 @@
 public class MessageInstruction extends Instruction {
-    final static String SEPARATOR_CODE = ":";
     public static final String MESSAGE_CODE = "M";
 
     private String order;

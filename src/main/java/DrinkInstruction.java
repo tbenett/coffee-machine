@@ -2,12 +2,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DrinkInstruction extends Instruction {
-  final String drinkOrder;
-
-  public static final String SEPARATOR_CODE = ":";
+  public static final String TEA_CODE = "T";
+  public static final String COFFEE_CODE = "C";
+  public static final String HOT_CHOCOLATE_CODE = "H";
   public static final String WITHOUT_SUGAR_CODE = "";
   public static final String WITH_STICK = "0";
   public static final String WITHOUT_STICK = "";
+
+  final String drinkOrder;
 
   DrinkInstruction(String drinkOrder) {
     this.drinkOrder = drinkOrder;
@@ -23,13 +25,13 @@ public class DrinkInstruction extends Instruction {
 
   private String makeDrinkCode() {
     if (drinkOrder.startsWith("tea")) {
-      return "T";
+      return TEA_CODE;
     }
     if (drinkOrder.startsWith("coffee")) {
-      return "C";
+      return COFFEE_CODE;
     }
     if (drinkOrder.startsWith("chocolate")) {
-      return "H";
+      return HOT_CHOCOLATE_CODE;
     }
     return "";
   }
