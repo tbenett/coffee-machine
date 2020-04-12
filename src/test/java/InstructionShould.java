@@ -6,6 +6,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class InstructionShould {
 
+
+
   @ParameterizedTest
   @CsvSource({"coffee, C::" , "chocolate, H::", "tea, T::"})
   void make_drink_instruction_without_sugar(String drink, String instruction) {
@@ -29,4 +31,15 @@ class InstructionShould {
 
     assertThat(InstructionFactory.create(message).toString()).isEqualTo("M:" + message);
   }
+
+  @Test
+  void test_x() {
+    assertThat(foo("tea with 1 sugar", 4)).isEqualTo("T:1:0");
+    /* assertThat(foo("tea with 1 sugar", 3)).isEqualTo("M:Not enough money missing 10 cents"); */
+  }
+
+  String foo(String order, int amount) {
+    
+  }
+
 }
