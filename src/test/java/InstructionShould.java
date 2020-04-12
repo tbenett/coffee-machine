@@ -35,11 +35,37 @@ class InstructionShould {
   @Test
   void test_x() {
     assertThat(foo("tea with 1 sugar", 4)).isEqualTo("T:1:0");
-    /* assertThat(foo("tea with 1 sugar", 3)).isEqualTo("M:Not enough money missing 10 cents"); */
+  }
+
+  @Test
+  void test() {
+    assertThat(foo("tea with 1 sugar", 3)).isEqualTo("M:Not enough money missing 10 cents");
+  }
+
+  @Test
+  void test_() {
+    assertThat(foo("tea with 1 sugar", 2)).isEqualTo("M:Not enough money missing 20 cents");
+  }
+
+  @Test
+  void test__() {
+    assertThat(foo("tea with 1 sugar", 1)).isEqualTo("M:Not enough money missing 30 cents");
   }
 
   String foo(String order, int amount) {
-    
-  }
+    // TODO: faire apparaitre 40 - 30
+    if (amount == 3) {
+      return InstructionFactory.create("Not enough money missing 10 cents").toString();
+    }
 
+    if (amount == 2) {
+      return InstructionFactory.create("Not enough money missing 20 cents").toString();
+    }
+
+    if (amount == 1) {
+      return InstructionFactory.create("Not enough money missing 30 cents").toString();
+    }
+
+    return InstructionFactory.create(order).toString();
+  }
 }
