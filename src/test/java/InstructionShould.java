@@ -30,10 +30,5 @@ class InstructionShould {
     assertThat(InstructionFactory.create(message).toString()).isEqualTo("M:" + message);
   }
 
-  @Test
-  void make_an_instruction_message_x() {
-    String message = "hello";
 
-    assertThat(InstructionFactory.makeInstruction(message).toString()).isEqualTo("M:" + message);
-  }
 }

@@ -1,10 +1,11 @@
-public class MessageInstruction {
+public class MessageInstruction extends DrinkInstruction {
     final static String SEPARATOR_CODE = ":";
     public static final String MESSAGE_CODE = "M";
 
     private String order;
 
     public MessageInstruction(String order) {
+        super(order);
         this.order = order;
     }
 
