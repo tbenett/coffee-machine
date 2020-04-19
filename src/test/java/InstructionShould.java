@@ -35,31 +35,20 @@ class InstructionShould {
     assertThat(foo("tea with 1 sugar", 40)).isEqualTo("T:1:0");
   }
 
-  @Test
-  void test() {
-    assertThat(foo("tea with 1 sugar", 30)).isEqualTo("M:Not enough money missing 10 cents");
-  }
-
-  @Test
-  void test_() {
-    assertThat(foo("tea with 1 sugar", 20)).isEqualTo("M:Not enough money missing 20 cents");
-  }
-
-  @Test
-  void test__() {
-    assertThat(foo("tea with 1 sugar", 10)).isEqualTo("M:Not enough money missing 30 cents");
-  }
-
   @ParameterizedTest
   @CsvSource({
           "tea with 1 sugar, 10, M:Not enough money missing 30 cents",
           "tea with 1 sugar, 20, M:Not enough money missing 20 cents",
           "tea with 1 sugar, 30, M:Not enough money missing 10 cents",
   })
-  void test___(String drink, int cents, String instruction) {
-    assertThat(foo("tea with 1 sugar", 10)).isEqualTo("M:Not enough money missing 30 cents");
+  void give_a_message_not_enough_money(String drink, int cents, String instruction) {
+    assertThat(foo(drink, cents)).isEqualTo(instruction);
   }
 
+  @Test
+  void name() {
+
+  }
 
   String foo(String order, int cents) {
     var missing = 40 - cents;
