@@ -30,10 +30,24 @@ class InstructionShould {
     assertThat(InstructionFactory.create(message).toString()).isEqualTo("M:" + message);
   }
 
+
+
   @Test
   void test_x() {
     assertThat(foo("tea with 1 sugar", 40)).isEqualTo("T:1:0");
   }
+
+  @Test
+
+  void test_xx() {
+    assertThat(foo("chocolate with 1 sugar", 50)).isEqualTo("H:1:0");
+  }
+
+  @Test
+  void name() {
+    assertThat(foo( "tea with 1 sugar", 20)).startsWith("M:Not enough money");
+  }
+
 
   @ParameterizedTest
   @CsvSource({
@@ -43,11 +57,6 @@ class InstructionShould {
   })
   void give_a_message_not_enough_money(String drink, int cents, String instruction) {
     assertThat(foo(drink, cents)).isEqualTo(instruction);
-  }
-
-  @Test
-  void name() {
-
   }
 
   String foo(String order, int cents) {
