@@ -6,8 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class InstructionShould {
 
-
-
   @ParameterizedTest
   @CsvSource({"coffee, C::" , "chocolate, H::", "tea, T::"})
   void make_drink_instruction_without_sugar(String drink, String instruction) {
@@ -34,35 +32,35 @@ class InstructionShould {
 
   @Test
   void test_x() {
-    assertThat(foo("tea with 1 sugar", 4)).isEqualTo("T:1:0");
+    assertThat(foo("tea with 1 sugar", 40)).isEqualTo("T:1:0");
   }
 
   @Test
   void test() {
-    assertThat(foo("tea with 1 sugar", 3)).isEqualTo("M:Not enough money missing 10 cents");
+    assertThat(foo("tea with 1 sugar", 30)).isEqualTo("M:Not enough money missing 10 cents");
   }
 
   @Test
   void test_() {
-    assertThat(foo("tea with 1 sugar", 2)).isEqualTo("M:Not enough money missing 20 cents");
+    assertThat(foo("tea with 1 sugar", 20)).isEqualTo("M:Not enough money missing 20 cents");
   }
 
   @Test
   void test__() {
-    assertThat(foo("tea with 1 sugar", 1)).isEqualTo("M:Not enough money missing 30 cents");
+    assertThat(foo("tea with 1 sugar", 10)).isEqualTo("M:Not enough money missing 30 cents");
   }
 
-  String foo(String order, int amount) {
+  String foo(String order, int cents) {
     // TODO: faire apparaitre 40 - 30
-    if (amount == 3) {
+    if (cents == 30) {
       return InstructionFactory.create("Not enough money missing 10 cents").toString();
     }
 
-    if (amount == 2) {
+    if (cents == 20) {
       return InstructionFactory.create("Not enough money missing 20 cents").toString();
     }
 
-    if (amount == 1) {
+    if (cents == 10) {
       return InstructionFactory.create("Not enough money missing 30 cents").toString();
     }
 
