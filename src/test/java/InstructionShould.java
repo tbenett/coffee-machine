@@ -50,20 +50,22 @@ class InstructionShould {
     assertThat(foo("tea with 1 sugar", 10)).isEqualTo("M:Not enough money missing 30 cents");
   }
 
+  @ParameterizedTest
+  @CsvSource({
+          "tea with 1 sugar, 10, M:Not enough money missing 30 cents",
+          "tea with 1 sugar, 20, M:Not enough money missing 20 cents",
+          "tea with 1 sugar, 30, M:Not enough money missing 10 cents",
+  })
+  void test___(String drink, int cents, String instruction) {
+    assertThat(foo("tea with 1 sugar", 10)).isEqualTo("M:Not enough money missing 30 cents");
+  }
+
+
   String foo(String order, int cents) {
-    // TODO: faire apparaitre 40 - 30
-    if (cents == 30) {
-      return InstructionFactory.create("Not enough money missing 10 cents").toString();
+    var missing = 40 - cents;
+    if (missing > 0) {
+      return InstructionFactory.create(String.format("Not enough money missing %d cents", missing)).toString();
     }
-
-    if (cents == 20) {
-      return InstructionFactory.create("Not enough money missing 20 cents").toString();
-    }
-
-    if (cents == 10) {
-      return InstructionFactory.create("Not enough money missing 30 cents").toString();
-    }
-
     return InstructionFactory.create(order).toString();
   }
 }
