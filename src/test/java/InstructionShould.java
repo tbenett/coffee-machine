@@ -53,17 +53,21 @@ class InstructionShould {
     assertThat(foo(drink, cents)).startsWith("M:Not enough money");
   }
 
+  // TODO 1/2: inject drinks prices
   @ParameterizedTest
   @CsvSource({
-          "tea with 1 sugar, 10, M:Not enough money missing 30 cents",
-          "tea with 1 sugar, 20, M:Not enough money missing 20 cents",
-          "tea with 1 sugar, 30, M:Not enough money missing 10 cents",
-          "coffee with 1 sugar, 59, M:Not enough money missing 1 cents",
-          "chocolate, 41, M:Not enough money missing 9 cents",
+          "tea with 1 sugar, 10, 30",
+          "tea with 1 sugar, 20, 20",
+          "tea with 1 sugar, 30, 10",
+          "tea with 1 sugar, 39, 1",
+          "coffee with 1 sugar, 59, 1",
+          "chocolate, 41, 9",
+          "chocolate, 49, 1",
   })
-  void give_a_message_not_enough_money_with_missing_amount(String drink, int cents, String instruction) {
-   // final var expectedInstruction = "M:Not enough money missing %d cents"
-    assertThat(foo(drink, cents)).isEqualTo(instruction);
+  void give_a_message_not_enough_money_with_missing_amount(String drink, int amount, int missingAmount) {
+    final var expectedInstruction = String.format("M:Not enough money missing %d cents", missingAmount);
+
+    assertThat(foo(drink, amount)).isEqualTo(expectedInstruction);
   }
 
   String foo(String order, int cents) {
@@ -76,21 +80,22 @@ class InstructionShould {
     return InstructionFactory.create(order).toString();
   }
 
+  // TODO 2/2: generalize check drink and return prices
   private int missingAmount(String order, int cents) {
     return minimalPriceForDrink(order) - cents;
   }
 
   private int minimalPriceForDrink(String order) {
     if (InstructionFactory.isTea(order)) {
-      return 40;
+      return DrinkPrices.TEA.amount();
     }
 
     if (InstructionFactory.isHotChocolate(order)) {
-      return 50;
+      return DrinkPrices.HOT_CHOCOLATE.amount();
     }
 
     if (InstructionFactory.isCoffee(order)) {
-      return 60;
+      return DrinkPrices.COFFEE.amount();
     }
 
     return 0;
