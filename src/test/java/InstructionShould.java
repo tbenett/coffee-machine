@@ -61,6 +61,16 @@ class InstructionShould {
 
   @ParameterizedTest
   @CsvSource({
+          "tea with 1 sugar, 20",
+          "chocolate with 1 sugar, 41",
+          "coffee, 59",
+  })
+  void name___(String drink, int cents) {
+    assertThat(foo(drink, cents)).startsWith("M:Not enough money");
+  }
+
+  @ParameterizedTest
+  @CsvSource({
           "tea with 1 sugar, 10, M:Not enough money missing 30 cents",
           "tea with 1 sugar, 20, M:Not enough money missing 20 cents",
           "tea with 1 sugar, 30, M:Not enough money missing 10 cents",
