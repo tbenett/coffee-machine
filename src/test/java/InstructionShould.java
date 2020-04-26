@@ -62,6 +62,7 @@ class InstructionShould {
           "chocolate, 41, M:Not enough money missing 9 cents",
   })
   void give_a_message_not_enough_money_with_missing_amount(String drink, int cents, String instruction) {
+   // final var expectedInstruction = "M:Not enough money missing %d cents"
     assertThat(foo(drink, cents)).isEqualTo(instruction);
   }
 
