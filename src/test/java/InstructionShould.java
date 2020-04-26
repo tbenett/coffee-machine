@@ -54,6 +54,11 @@ class InstructionShould {
     assertThat(foo( "chocolate with 1 sugar", 41)).startsWith("M:Not enough money");
   }
 
+  @Test
+  void name__() {
+    assertThat(foo( "coffee", 59)).startsWith("M:Not enough money");
+  }
+
   @ParameterizedTest
   @CsvSource({
           "tea with 1 sugar, 10, M:Not enough money missing 30 cents",
@@ -71,9 +76,18 @@ class InstructionShould {
         return InstructionFactory.create(String.format("Not enough money missing %d cents", missing)).toString();
       }
     }
-    var missing = 50 - cents;
-    if (missing > 0) {
-      return InstructionFactory.create("Not enough money").toString();
+    if (InstructionFactory.isHotChocolate(order)) {
+      var missing = 50 - cents;
+      if (missing > 0) {
+        return InstructionFactory.create("Not enough money").toString();
+      }
+    }
+
+    if (InstructionFactory.isCoffee(order)) {
+      var missing = 60 - cents;
+      if (missing > 0) {
+        return InstructionFactory.create("Not enough money").toString();
+      }
     }
 
     return InstructionFactory.create(order).toString();
