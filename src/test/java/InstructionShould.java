@@ -53,6 +53,7 @@ class InstructionShould {
     assertThat(foo(drink, cents)).startsWith("M:Not enough money");
   }
 
+  // TODO 3/2: abstraction on Order & Drink
   // TODO 1/2: inject drinks prices
   @ParameterizedTest
   @CsvSource({

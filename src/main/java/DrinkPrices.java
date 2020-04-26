@@ -1,8 +1,7 @@
 enum DrinkPrices {
   TEA(40),
   HOT_CHOCOLATE(50),
-  COFFEE(60),
-  ;
+  COFFEE(60);
 
   private final int amount;
 
