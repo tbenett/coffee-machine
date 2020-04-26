@@ -30,24 +30,29 @@ class InstructionShould {
     assertThat(InstructionFactory.create(message).toString()).isEqualTo("M:" + message);
   }
 
-
-
   @Test
   void test_x() {
     assertThat(foo("tea with 1 sugar", 40)).isEqualTo("T:1:0");
   }
 
   @Test
-
   void test_xx() {
     assertThat(foo("chocolate with 1 sugar", 50)).isEqualTo("H:1:0");
   }
+
+  // tea is 0.4
+  // chocolate is 0.5
+  // coffee is 0.6
 
   @Test
   void name() {
     assertThat(foo( "tea with 1 sugar", 20)).startsWith("M:Not enough money");
   }
 
+  @Test
+  void name_() {
+    assertThat(foo( "chocolate with 1 sugar", 41)).startsWith("M:Not enough money");
+  }
 
   @ParameterizedTest
   @CsvSource({
@@ -60,10 +65,17 @@ class InstructionShould {
   }
 
   String foo(String order, int cents) {
-    var missing = 40 - cents;
-    if (missing > 0) {
-      return InstructionFactory.create(String.format("Not enough money missing %d cents", missing)).toString();
+    if (InstructionFactory.isTea(order)) {
+      var missing = 40 - cents;
+      if (missing > 0) {
+        return InstructionFactory.create(String.format("Not enough money missing %d cents", missing)).toString();
+      }
     }
+    var missing = 50 - cents;
+    if (missing > 0) {
+      return InstructionFactory.create("Not enough money").toString();
+    }
+
     return InstructionFactory.create(order).toString();
   }
 }
