@@ -15,6 +15,10 @@ public class DrinkInstruction extends Instruction {
     this.drinkOrder = drinkOrder;
   }
 
+  DrinkInstruction(Drink drink) {
+    this.drinkOrder = drink.name();
+  }
+
   @Override
   String make() {
     return

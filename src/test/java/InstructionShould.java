@@ -16,7 +16,8 @@ class InstructionShould {
   @CsvSource({"coffee, C::" , "chocolate, H::", "tea, T::"})
   void make_drink_instruction_without_sugar_abstract(String drinkName, String instruction) {
     var drink = Drink.from(drinkName);
-    assertThat(InstructionFactory.create(drink).toString()).isEqualTo(instruction) ;
+
+    assertThat(InstructionFactory.create(drink)).isEqualTo(Instruction.fromString(instruction));
   }
 
 
@@ -61,8 +62,6 @@ class InstructionShould {
     assertThat(foo(drink, cents)).startsWith("M:Not enough money");
   }
 
-  // TODO 3/2: abstraction on Order & Drink
-  // TODO 1/2: inject drinks prices
   @ParameterizedTest
   @CsvSource({
           "tea with 1 sugar, 10, 30",
@@ -89,7 +88,6 @@ class InstructionShould {
     return InstructionFactory.create(order).toString();
   }
 
-  // TODO 2/2: generalize check drink and return prices
   private int missingAmount(String order, int cents) {
     return minimalPriceForDrink(order) - cents;
   }

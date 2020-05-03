@@ -1,5 +1,10 @@
 class InstructionFactory {
 
+  static final Drink TEA = Drink.from("tea");
+  static final Drink HOT_CHOCOLATE = Drink.from("chocolate");
+  static final Drink COFFEE = Drink.from("coffee");
+
+
   static private boolean isDrinkOrder(String order) {
     return isTea(order) || isHotChocolate(order) || isCoffee(order);
   }
@@ -24,7 +29,19 @@ class InstructionFactory {
   }
 
     public static Instruction create(Drink drink) {
-        return new MessageInstruction(drink);
-    }
+      if (drink.equals(TEA)) {
+        return new DrinkTeaInstruction();
+      }
+
+      if (drink.equals(HOT_CHOCOLATE)) {
+        return new DrinkHotChocolateInstruction();
+      }
+
+      if (drink.equals(COFFEE)) {
+        return new DrinkCoffeeInstruction();
+      }
+
+      throw new UnsupportedOperationException();
+  }
 
 }
