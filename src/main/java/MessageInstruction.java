@@ -7,6 +7,10 @@ public class MessageInstruction extends Instruction {
         this.order = order;
     }
 
+    public MessageInstruction(Drink drink) {
+        throw new UnsupportedOperationException();
+    }
+
     @Override
      String make() {
          return MESSAGE_CODE + SEPARATOR_CODE + order;

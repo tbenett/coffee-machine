@@ -22,4 +22,9 @@ class InstructionFactory {
        }
         return new MessageInstruction(order);
   }
+
+    public static Instruction create(Drink drink) {
+        return new MessageInstruction(drink);
+    }
+
 }

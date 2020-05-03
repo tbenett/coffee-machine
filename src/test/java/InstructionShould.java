@@ -13,6 +13,14 @@ class InstructionShould {
   }
 
   @ParameterizedTest
+  @CsvSource({"coffee, C::" , "chocolate, H::", "tea, T::"})
+  void make_drink_instruction_without_sugar_abstract(String drinkName, String instruction) {
+    var drink = Drink.from(drinkName);
+    assertThat(InstructionFactory.create(drink).toString()).isEqualTo(instruction) ;
+  }
+
+
+  @ParameterizedTest
   @CsvSource({
     "coffee with 1 sugar, C:1:0",
     "coffee with 2 sugars, C:2:0",
