@@ -6,21 +6,33 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class InstructionShould {
 
-  @ParameterizedTest
-  @CsvSource({"coffee, C::" , "chocolate, H::", "tea, T::"})
-  void make_drink_instruction_without_sugar(String drink, String instruction) {
-    assertThat(InstructionFactory.create(drink).toString()).isEqualTo(instruction) ;
-  }
 
   @ParameterizedTest
   @CsvSource({"coffee, C::" , "chocolate, H::", "tea, T::"})
-  void make_drink_instruction_without_sugar_abstract(String drinkName, String instruction) {
+  void make_drink_instruction_without_sugar(String drinkName, String instruction) {
     var drink = Drink.from(drinkName);
 
     assertThat(InstructionFactory.create(drink))
       .isExactlyInstanceOf(Instruction.fromString(instruction).getClass());
   }
 
+
+  @Test
+  void test_z() {
+    DrinkCoffeeInstruction coffeeWithOneSugar = new DrinkCoffeeInstruction(1);
+    assertThat(Instruction.fromString("C:1:0")).isEqualTo(coffeeWithOneSugar);
+  }
+
+  @ParameterizedTest
+  @CsvSource({
+          "coffee with 1 sugar, C:1:0",
+          "coffee with 2 sugars, C:2:0",
+          "tea with 1 sugar, T:1:0",
+          "chocolate with 1 sugar, H:1:0"
+  })
+  void make_drink_instruction_with_sugar_and_stick_new_version(String drink, String instruction) {
+    assertThat(InstructionFactory.create(drink).toString()).isEqualTo(instruction);
+  }
 
   @ParameterizedTest
   @CsvSource({
