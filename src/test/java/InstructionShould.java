@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class InstructionShould {
 
-
   @ParameterizedTest
   @CsvSource({"coffee, C::" , "chocolate, H::", "tea, T::"})
   void make_drink_instruction_without_sugar(String drinkName, String instruction) {
