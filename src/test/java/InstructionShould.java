@@ -17,7 +17,8 @@ class InstructionShould {
   void make_drink_instruction_without_sugar_abstract(String drinkName, String instruction) {
     var drink = Drink.from(drinkName);
 
-    assertThat(InstructionFactory.create(drink)).isEqualTo(Instruction.fromString(instruction));
+    assertThat(InstructionFactory.create(drink))
+      .isExactlyInstanceOf(Instruction.fromString(instruction).getClass());
   }
 
 
