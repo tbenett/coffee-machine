@@ -5,10 +5,10 @@ abstract class Instruction {
   public static final String SEPARATOR_CODE = ":";
 
    static public Instruction fromString(String instruction) {
-     Pattern patternInsctructionWithSugar = Pattern.compile("C:(1|2)+:.*");
-     Matcher matcherDrinkWithSugar = patternInsctructionWithSugar.matcher(instruction);
 
      if (instruction.startsWith("C")) {
+       Pattern patternInsctructionWithSugar = Pattern.compile("C:(1|2)+:.*");
+       Matcher matcherDrinkWithSugar = patternInsctructionWithSugar.matcher(instruction);
        if (matcherDrinkWithSugar.find()) {
          String quantity = matcherDrinkWithSugar.group(1);
          return new DrinkCoffeeInstruction(Integer.parseInt(quantity));

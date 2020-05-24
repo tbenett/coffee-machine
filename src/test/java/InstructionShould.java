@@ -37,6 +37,16 @@ class InstructionShould {
   }
 
 
+  @Test
+  void test_other() {
+    final var stringInstruction = "C:2:0";
+    Drink drink = new Drink("coffee with 1 sugar");
+    ProtocolDrinkMachine protocol;
+    assertThat(protocol.makeInstruction(drink)).isEqualTo(new DrinkCoffeeInstruction(2));
+  }
+
+
+
   @ParameterizedTest
   @CsvSource({
           "coffee with 1 sugar, C:1:0",
