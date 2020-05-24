@@ -22,6 +22,13 @@ class InstructionShould {
     assertThat(Instruction.fromString("C:1:0")).isEqualTo(coffeeWithOneSugar);
   }
 
+  @Test
+  void test_zz() {
+    DrinkCoffeeInstruction coffeeWithOneSugar = new DrinkCoffeeInstruction(2);
+    assertThat(Instruction.fromString("C:1:0")).isEqualTo(coffeeWithOneSugar);
+  }
+
+
   @ParameterizedTest
   @CsvSource({
           "coffee with 1 sugar, C:1:0",

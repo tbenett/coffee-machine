@@ -5,16 +5,16 @@ abstract class Instruction {
   public static final String SEPARATOR_CODE = ":";
 
    static public Instruction fromString(String instruction) {
-     Pattern patternInsctructionWithSugar = Pattern.compile("...");
+     Pattern patternInsctructionWithSugar = Pattern.compile("C:(1|2)+:.*");
      Matcher matcherDrinkWithSugar = patternInsctructionWithSugar.matcher(instruction);
-     matcherDrinkWithSugar.find();
-
-     if (matcherDrinkWithSugar.group(1)) {
-
-     }
 
      if (instruction.startsWith("C")) {
+       if (matcherDrinkWithSugar.find()) {
+         String quantity = matcherDrinkWithSugar.group(1)
+         return new DrinkCoffeeInstruction(1);
+       }
        return new DrinkCoffeeInstruction();
+
      }
 
      if (instruction.startsWith("H")) {
