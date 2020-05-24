@@ -15,7 +15,7 @@ class DrinkCoffeeInstruction extends DrinkInstruction {
 
   @Override
   public String toString() {
-    return "C::";
+    return String.format("C:%d:%s", sugarQuantity, sugarQuantity > 0 ? "0" : "");
   }
 
   @Override

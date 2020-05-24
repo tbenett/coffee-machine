@@ -25,7 +25,15 @@ class InstructionShould {
   @Test
   void test_zz() {
     DrinkCoffeeInstruction coffeeWithOneSugar = new DrinkCoffeeInstruction(2);
-    assertThat(Instruction.fromString("C:1:0")).isEqualTo(coffeeWithOneSugar);
+    assertThat(Instruction.fromString("C:2:0")).isEqualTo(coffeeWithOneSugar);
+  }
+
+  @Test
+  void test_zzz() {
+    final var stringInstruction = "C:2:0";
+
+    assertThat(new DrinkCoffeeInstruction(2).toString())
+      .isEqualTo(stringInstruction);
   }
 
 

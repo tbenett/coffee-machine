@@ -10,8 +10,8 @@ abstract class Instruction {
 
      if (instruction.startsWith("C")) {
        if (matcherDrinkWithSugar.find()) {
-         String quantity = matcherDrinkWithSugar.group(1)
-         return new DrinkCoffeeInstruction(1);
+         String quantity = matcherDrinkWithSugar.group(1);
+         return new DrinkCoffeeInstruction(Integer.parseInt(quantity));
        }
        return new DrinkCoffeeInstruction();
 
